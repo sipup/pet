@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pet/features/catalog/presentation/compomemts/catalog_product_card.dart';
 import 'package:pet/features/product/domain/product_entity.dart';
 
+@RoutePage()
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
 
