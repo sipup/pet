@@ -15,7 +15,7 @@ class CatalogScreen extends StatelessWidget {
       ),
       body: GridView.builder(
         itemCount: products.length,
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 164 / 292,
