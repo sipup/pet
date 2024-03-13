@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pet/features/catalog/presentation/compomemts/catalog_product_card.dart';
 import 'package:pet/features/product/domain/product_entity.dart';
 
+@RoutePage()
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
 
@@ -13,7 +15,7 @@ class CatalogScreen extends StatelessWidget {
       ),
       body: GridView.builder(
         itemCount: products.length,
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 164 / 292,
