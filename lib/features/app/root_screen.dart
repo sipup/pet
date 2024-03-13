@@ -12,6 +12,7 @@ class RootScreen extends StatelessWidget {
       routes: const [
         HomeRoute(),
         CatalogRoute(),
+        CartRoute(),
         ProfileRoute(),
       ],
       bottomNavigationBuilder: (context, tabsRouter) => NavigationBar(
@@ -23,6 +24,10 @@ class RootScreen extends StatelessWidget {
           NavigationDestination(
             icon: Icon(Icons.manage_search),
             label: 'Каталог',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Корзина',
           ),
           NavigationDestination(
             icon: Icon(Icons.person),
