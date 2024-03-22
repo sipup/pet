@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CatalogScreen(),
       );
     },
+    CategoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CategoryScreen(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -72,6 +78,20 @@ class CatalogRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CatalogRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CategoryScreen]
+class CategoryRoute extends PageRouteInfo<void> {
+  const CategoryRoute({List<PageRouteInfo>? children})
+      : super(
+          CategoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CategoryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
