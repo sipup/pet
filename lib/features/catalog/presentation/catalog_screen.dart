@@ -1,11 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pet/features/catalog/presentation/compomemts/catalog_product_card.dart';
-import 'package:pet/features/product/domain/product_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pet/features/catalog/domain/catalog_cubit.dart';
+import 'package:pet/features/catalog/domain/catalog_state.dart';
+import 'package:pet/features/catalog/presentation/components/catalog_product_card.dart';
 
 @RoutePage()
-class CatalogScreen extends StatelessWidget {
+class CatalogScreen extends StatefulWidget {
   const CatalogScreen({super.key});
+
+  @override
+  State<CatalogScreen> createState() => _CatalogScreenState();
+}
+
+class _CatalogScreenState extends State<CatalogScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<CatalogCubit>().fetchProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,31 +26,28 @@ class CatalogScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Каталог'),
       ),
-      body: GridView.builder(
-        itemCount: products.length,
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 164 / 292,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16),
-        itemBuilder: (context, index) {
-          return CatalogProductCard(product: products[index]);
+      body: BlocBuilder<CatalogCubit, CatalogState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return GridView.builder(
+              itemCount: state.product.length,
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 164 / 292,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16),
+              itemBuilder: (context, index) {
+                return CatalogProductCard(product: state.product[index]);
+              },
+            );
+          }
         },
       ),
     );
   }
 }
-
-final products = [
-  ProductEntity(
-      price: 1999,
-      name: 'Мюсли',
-      imageUrl:
-          'https://avatars.mds.yandex.net/get-mpic/4955516/img_id5535180542733920070.jpeg/300x400'),
-  ProductEntity(
-      price: 1555,
-      name: 'Сгущенка',
-      imageUrl:
-          'https://avatars.mds.yandex.net/get-mpic/4055688/img_id1705711063236199458.jpeg/300x400')
-];
